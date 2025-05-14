@@ -37,6 +37,10 @@ public class HelloController {
     private Button krat;
     @FXML
     private Button deleno;
+    @FXML
+    private Button rovnaSe;
+    @FXML
+    private Label vysledek;
 
     @FXML
     protected void ontlacitkoClicked(ActionEvent event) {
@@ -46,6 +50,28 @@ public class HelloController {
     }
     @FXML
     protected void znaminkaClicked(ActionEvent event) {
-
+        String  text = ((Button) event.getSource()).getText();
+        String doplnovani = textArea.getText();
+        textArea.setText(doplnovani+" "+text+" ");
     }
+
+    @FXML
+    protected void pocitaniClicked() {
+        String splitText = textArea.getText().replaceAll("\\s+", "");
+        String[] splitplus = splitText.split("\\+");
+
+        int soucet = 0;
+        for (String s : splitplus) {
+            try {
+                soucet += Integer.parseInt(s);
+            } catch (NumberFormatException e) {
+                vysledek.setText("Chybný vstup: " + s);
+                return;
+            }
+        }
+
+        vysledek.setText(" = " + soucet);
+    }
+
+
 }
